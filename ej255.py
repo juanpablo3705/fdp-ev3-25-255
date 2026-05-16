@@ -14,12 +14,11 @@ while True:
     print("3. Salir.")
 
     # verificación que el usuario ingrese sólo números
-    while True:
-        try:
-            opcion_menu1 = int(input("Ingrese una opción del menú: "))
-            break
-        except ValueError:
-            print("Error. Escriba un número del 1 al 3.")
+    try:
+        opcion_menu1 = int(input("Ingrese una opción del menú: "))
+    except ValueError:
+        print("Error. Escriba un número del 1 al 3.")
+        continue
 
     # inicio opción 1: iniciar sesión
     if opcion_menu1 == 1:
@@ -37,6 +36,7 @@ while True:
             # si coincide el login de alguno de los 3 usuarios, pasa al siguiente menú:
             if (intento_us == usuario1 and intento_ct == contrasena1) or (intento_us == usuario2 and intento_ct == contrasena2) or (intento_us == usuario3 and intento_ct == contrasena3):
                 while True:
+                    print("----- Otro Menú -----")
                     print("1. Realizar llamada.")
                     print("2. Enviar correo electrónico.")
                     print("3. Cerrar sesión.")
@@ -49,14 +49,24 @@ while True:
                         except ValueError:
                             print("Error. Escriba un número del 1 al 3.")
                     
-                    # proceso del segundo menú (FALTAN VERIFICACIONES celular y correo):
+                    # proceso del segundo menú:
                     if opcion_menu2 == 1:
-                        celular = int(input("Ingrese el número celular: "))
-                        print("Aló... ALÓ!?...")
+                        celular = (input("Ingrese el número celular (9 dígitos, comience con 9): "))
+                        if len(celular) == 9 and celular.startswith("9") and celular.isdigit():
+                            print("Aló... ALÓ!?...")
+                        else:
+                            print("Error. El número debe tener 9 dígitos y comenzar con 9")
                     elif opcion_menu2 == 2:
                         correo = (input("Ingrese correo electrónico: "))
-                        mensaje = input("Ingrese mensaje a enviar: ")
-                        print("Mensaje enviado.")
+                        recorrido = False
+                        for caracter in correo:
+                            if caracter == "@":
+                                recorrido = True
+                        if recorrido:
+                            mensaje = input("Ingrese mensaje del correo: ")
+                            print(f"Correo enviado a {correo}. Mensaje: '{mensaje}'.")
+                        else:
+                            print("Error. El correo debe incluir el caracter '@'.")
                     elif opcion_menu2 == 3:
                         print("Volviendo al menú principal...")
                         break
@@ -73,7 +83,7 @@ while True:
                     print("Nombre y usuario incorrectos.")
     
     # inicio opción 2:
-    if opcion_menu1 == 2:
+    elif opcion_menu1 == 2:
         if usuario1 != None and usuario2 != None and usuario3 != None:
             print("Error. No se pueden registrar más usuarios. Límite de 3 usuarios alcanzado.")
         else:
@@ -89,10 +99,10 @@ while True:
                 contrasena3 = input("Ingrese nueva contraseña: ")
 
     # inicio salida opción 3:
-    if opcion_menu1 == 3:
+    elif opcion_menu1 == 3:
         print("Cerrando sesión...")
         break
     
     # verificación que el usuario ingrese solo del 1 al 3 en primer menú:
-    elif opcion_menu1 < 1 or opcion_menu1 > 3:
+    else:
         print("Error. Ingrese una opción válida para el menú (1-3)")
