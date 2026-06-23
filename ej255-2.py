@@ -21,7 +21,7 @@ while True:
                 print("Error. El valor debe ser mayor a cero.")
         except ValueError:
             print("Error. El valor debe ser numérico, no letras.")
-    # opcion 1 iniciar sesion:
+    # opcion 1 iniciar sesión:
     if (usuario1 == None) and (usuario2 == None) and (usuario3 == None):
         print("Es necesario registrar un usuario antes. Presiones opción 2.")
         continue    
