@@ -60,9 +60,8 @@ while True:
                                 print(f"¡Mensaje enviado! Su mensaje fue: '{mensaje}'.")
                                 break
                             else:
-                                print("Error. La dirección de correo debe contener un @.")
+                                print("Error. La dirección de correo debe contener @.")
                     case 3:
                         print("Cerrando sesión...")
                         print("Volviendo al menú principal...")
                         break
-                
